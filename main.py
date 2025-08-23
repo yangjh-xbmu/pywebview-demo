@@ -73,7 +73,7 @@ class Api:
     def about_app(self):
         """关于应用"""
         webview.windows[0].create_confirmation_dialog(
-            '关于 PyWebView Demo', 
+            '关于 PyWebView Demo',
             'PyWebView 最小化演示应用\n版本: 1.0.0\n基于 PyWebView 构建'
         )
         return '显示关于信息'
@@ -195,7 +195,7 @@ def create_menu():
             MenuAction('退出', exit_app_action)
         ]
     )
-    
+
     # 创建编辑菜单
     edit_menu = Menu(
         '编辑',
@@ -207,7 +207,7 @@ def create_menu():
             MenuAction('粘贴', paste_action)
         ]
     )
-    
+
     # 创建工具菜单
     tools_menu = Menu(
         '工具',
@@ -217,7 +217,7 @@ def create_menu():
             MenuAction('当前目录', current_dir_action)
         ]
     )
-    
+
     # 创建帮助菜单
     help_menu = Menu(
         '帮助',
@@ -225,7 +225,7 @@ def create_menu():
             MenuAction('关于', about_action)
         ]
     )
-    
+
     return [file_menu, edit_menu, tools_menu, help_menu]
 
 
@@ -262,7 +262,7 @@ def main():
 
     # 创建菜单
     app_menu = create_menu()
-    
+
     # 创建窗口
     webview.create_window(
         title='PyWebView 最小化演示',
