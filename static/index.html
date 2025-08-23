@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyWebView 最小化演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+                         'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-card h3 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .feature-card p {
+            color: #718096;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info-section {
+            background: #edf2f7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info-section h3 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .info-value {
+            color: #718096;
+            font-family: monospace;
+        }
+
+        .counter-display {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+
+        .status.error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 1px solid #fc8181;
+        }
+
+        .menu-info {
+            background: #e6f3ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #4a90e2;
+        }
+
+        .menu-info h3 {
+            color: #2c5282;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .menu-info p {
+            color: #2d3748;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .menu-info ul {
+            color: #2d3748;
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+
+        .menu-info li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .menu-info strong {
+            color: #2c5282;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 PyWebView</h1>
+        <p class="subtitle">跨平台桌面应用开发框架演示 - 现在支持菜单栏！</p>
+        
+        <div class="menu-info">
+            <h3>📋 菜单功能说明</h3>
+            <p>应用现在包含类似Word的菜单栏，包含以下菜单：</p>
+            <ul>
+                <li><strong>文件</strong>：新建、打开、保存、退出</li>
+                <li><strong>编辑</strong>：撤销、重做、复制、粘贴</li>
+                <li><strong>工具</strong>：系统信息、计数器、当前目录</li>
+                <li><strong>帮助</strong>：关于</li>
+            </ul>
+            <p>您可以通过菜单栏或下面的按钮来使用这些功能。</p>
+        </div>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>🖥️ 跨平台</h3>
+                <p>支持 Windows、macOS 和 Linux 系统</p>
+            </div>
+            <div class="feature-card">
+                <h3>🌐 Web 技术</h3>
+                <p>使用 HTML、CSS、JavaScript 构建界面</p>
+            </div>
+            <div class="feature-card">
+                <h3>🐍 Python 后端</h3>
+                <p>强大的 Python 生态系统支持</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ 轻量级</h3>
+                <p>小巧快速，易于部署和分发</p>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="getSystemInfo()">获取系统信息</button>
+            <button onclick="incrementCounter()">计数器 +1</button>
+            <button onclick="showMessage()">显示消息</button>
+            <button onclick="getCurrentDirectory()">获取目录</button>
+        </div>
+
+        <div class="counter-display" id="counter">计数器: 0</div>
+
+        <div class="info-section" id="systemInfo" style="display: none;">
+            <h3>系统信息</h3>
+            <div id="systemInfoContent"></div>
+        </div>
+
+        <div class="status" id="status" style="display: none;"></div>
+    </div>
+
+    <script>
+        // 显示状态消息
+        function showStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+
+        // 获取系统信息
+        async function getSystemInfo() {
+            try {
+                const info = await pywebview.api.get_system_info();
+                const content = document.getElementById('systemInfoContent');
+                const infoSection = document.getElementById('systemInfo');
+                
+                content.innerHTML = `
+                    <div class="info-item">
+                        <span class="info-label">操作系统:</span>
+                        <span class="info-value">${info.platform}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">系统版本:</span>
+                        <span class="info-value">${info.version}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">架构:</span>
+                        <span class="info-value">${info.architecture}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Python 版本:</span>
+                        <span class="info-value">${info.python_version}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">机器类型:</span>
+                        <span class="info-value">${info.machine}</span>
+                    </div>
+                `;
+                
+                infoSection.style.display = 'block';
+                showStatus('系统信息获取成功！');
+            } catch (error) {
+                showStatus('获取系统信息失败: ' + error.message, 'error');
+            }
+        }
+
+        // 计数器递增
+        async function incrementCounter() {
+            try {
+                const count = await pywebview.api.increment_counter();
+                document.getElementById('counter').textContent = `计数器: ${count}`;
+                showStatus(`计数器已增加到 ${count}`);
+            } catch (error) {
+                showStatus('计数器操作失败: ' + error.message, 'error');
+            }
+        }
+
+        // 显示消息对话框
+        async function showMessage() {
+            try {
+                const result = await pywebview.api.show_message('Hello from PyWebView! 这是一个测试消息。');
+                showStatus(result);
+            } catch (error) {
+                showStatus('显示消息失败: ' + error.message, 'error');
+            }
+        }
+
+        // 获取当前目录
+        async function getCurrentDirectory() {
+            try {
+                const dir = await pywebview.api.get_current_directory();
+                showStatus(`当前目录: ${dir}`);
+            } catch (error) {
+                showStatus('获取目录失败: ' + error.message, 'error');
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // 获取初始计数器值
+                const count = await pywebview.api.get_counter();
+                document.getElementById('counter').textContent = `计数器: ${count}`;
+                showStatus('PyWebView 应用已就绪！');
+            } catch (error) {
+                showStatus('初始化失败: ' + error.message, 'error');
+            }
+        });
+    </script>
+</body>
+</html>
